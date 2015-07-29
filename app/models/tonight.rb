@@ -6,15 +6,25 @@ class Tonight
 
     @cache = cache  # html
 
-    @img_url = img_url
     @title = title
     @summary = summary
+    @img_url = img_url
     @permalink = permalink
   end
 
   def inspect
     "#<Tonight:#{permalink}>"
   end
+
+  def attributes
+    Hash[
+      title: title,
+      summary: summary,
+      img_url: img_url,
+      permalink: permalink
+    ].with_indifferent_access
+  end
+
 
   # `x || y ` => only parse the document once and cache the result on the instance
   def cache

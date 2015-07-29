@@ -9,7 +9,11 @@ describe Tonight do
   end
 
   it 'is initialized' do
-    expect(@tonight).to respond_to(:cache, :title, :summary, :img_url, :permalink)
+    expect(@tonight).to respond_to(:cache, :title, :summary, :img_url, :permalink, :attributes)
+
+    attributes = @tonight.try(:attributes)
+    expect(attributes).not_to include(:cache)
+    expect(attributes).to include(:title, :summary, :img_url, :permalink)
   end
 
   it 'is built from data scraped from "/tonight"' do    
