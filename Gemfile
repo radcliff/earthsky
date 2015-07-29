@@ -27,3 +27,7 @@ gem 'nokogiri'
 # Debug w/ PRY in all environments
 gem 'pry'
 gem 'pry-rails'
+
+group :development, :test do
+  gem 'rspec-rails'
+end
