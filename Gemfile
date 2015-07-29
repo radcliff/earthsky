@@ -7,6 +7,8 @@ gem 'rails-api'
 
 gem 'spring', :group => :development
 
+gem 'redis'
+
 gem 'faraday'
 gem 'nokogiri'
 
