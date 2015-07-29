@@ -108,6 +108,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  nokogiri
   pry
   pry-rails
   rails (= 4.2.1)

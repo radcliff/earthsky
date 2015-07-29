@@ -8,6 +8,7 @@ gem 'rails-api'
 gem 'spring', :group => :development
 
 
+gem 'nokogiri'
 
 
 # To use ActiveModel has_secure_password
