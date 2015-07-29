@@ -30,4 +30,5 @@ gem 'pry-rails'
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'vcr'
 end
