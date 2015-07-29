@@ -7,7 +7,10 @@ gem 'rails-api'
 
 gem 'spring', :group => :development
 
+gem 'redis'
 
+gem 'faraday'
+gem 'nokogiri'
 
 
 # To use ActiveModel has_secure_password
@@ -26,3 +29,8 @@ gem 'spring', :group => :development
 # Debug w/ PRY in all environments
 gem 'pry'
 gem 'pry-rails'
+
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'vcr', git: 'https://github.com/vcr/vcr.git'
+end
