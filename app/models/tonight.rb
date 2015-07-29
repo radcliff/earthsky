@@ -12,6 +12,13 @@ class Tonight
     @permalink = permalink
   end
 
+
+  def self.find  # get most recent 'tonight' post from Redis
+    key = ['tonight', Date.today.to_s].join(':')
+    $redis.hgetall(key)
+  end
+
+
   def inspect
     "#<Tonight:#{permalink}>"
   end
