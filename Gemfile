@@ -22,5 +22,7 @@ gem 'spring', :group => :development
 # Deploy with Capistrano
 # gem 'capistrano', :group => :development
 
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
+
+# Debug w/ PRY in all environments
+gem 'pry'
+gem 'pry-rails'
