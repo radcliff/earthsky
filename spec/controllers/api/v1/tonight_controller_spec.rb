@@ -17,7 +17,7 @@ describe Api::V1::TonightController, type: :controller do
       expect(response).to be_success
       expect(response).to have_http_status(200)
 
-      tonight = JSON.parse(response.body)["data"]
+      tonight = JSON.parse(response.body)["tonight"]
       expect(tonight).to eq(@tonight.attributes)
     end 
 
