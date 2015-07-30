@@ -17,14 +17,18 @@ class Tonight
   def self.find_or_create  #=> returns serialized object
     key = ['tonight', Date.today.to_s].join(':')
 
-    if $redis.exists(key)  # check if in cache
+    if $redis.sismember('tonight:set', key)  # check if in cache
       @tonight = $redis.hgetall(key)
     else  # or create
       @tonight = Tonight.new.attributes
-      $redis.mapped_hmset(key, @tonight)
+      $redis.multi do |redis|
+        redis.mapped_hmset(key, @tonight)
+        redis.sadd('tonight:set', key)  # allows search if a particular key is in set -- Redis is BYO indexes
+        redis.lpush('tonight:index', key)  # allows search by range - archive is stack, push on left
+      end
     end
 
-    return @tonight
+    return @tonight  # TODO: build from hash here
   end
 
 
@@ -82,12 +86,12 @@ private
       tries += 1
 
       response = Faraday.get 'http://earthsky.org/tonight'
-      @doc = Nokogiri::HTML(response.body)
+      @doc = Nokogiri::HTML(response.body)  # parse DOM to tree structure
 
     rescue Faraday::ConnectionFailed => error
       puts error.message
 
-      sleep(0.5); retry if tries < 5
+      sleep(0.5); retry if tries < 5  # try a few times for a response, then give up
       raise
     end
   end
