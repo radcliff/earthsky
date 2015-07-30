@@ -9,7 +9,7 @@ describe Tonight do
   end
 
   it 'is initialized' do
-    expect(@tonight).to respond_to(:cache, :title, :summary, :img_url, :permalink, :attributes)
+    expect(@tonight).to respond_to(:cache, :date, :title, :summary, :img_url, :permalink, :attributes)
 
     attributes = @tonight.try(:attributes)
     expect(attributes).not_to include(:cache)
@@ -18,10 +18,11 @@ describe Tonight do
 
   it 'is built from data scraped from "/tonight"' do    
     attributes = Hash[
-      title: "Orion the Hunter: Ghost of summer dawn",
-      summary: "In the wee hours before daybreak, look for Orion the Hunter: Ghost of the summer dawn.",
-      img_url: "http://en.es-static.us/upl/2010/07/10jul31_430.jpg",
-      permalink: "http://earthsky.org/tonight/orion-the-hunter-ghost-of-the-summer-dawn" 
+      date: "2015-07-30",
+      title: "Blue Moon – second July full moon – on July 31",
+      summary: "The July 31, 2015 full moon won’t appear blue in color.  But – as the second of two full moons to occur in a single calendar month – many will call it a Blue Moon.",
+      img_url: "http://en.es-static.us/upl/2015/07/moon-blue-La-Lune-The-Moon-7-27-2015-Patrick-Casaert-sq-e1438256991732.jpg",
+      permalink: "http://earthsky.org/tonight/blue-moon-second-july-full-moon-to-occur-on-july-31" 
     ]
 
     expect(@tonight).to have_attributes attributes
@@ -42,7 +43,7 @@ describe Tonight do
 
     it 'finds an existing "tonight' do
       tonight = $redis.hgetall(@key)
-      tonite = Tonight.find_or_create  # no web request/no VCR
+      tonite = Tonight.find_or_create  # no VCR -> shouldn't make web request here
 
       expect(tonight).to eq(tonite)
     end

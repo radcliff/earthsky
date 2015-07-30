@@ -1,11 +1,12 @@
 class Tonight
-  attr_reader :cache, :title, :summary, :img_url, :permalink
+  attr_reader :cache, :date, :title, :summary, :img_url, :permalink
 
   def initialize
     scrape  # grab page from earthsky/tonight
 
     @cache = cache  # html
 
+    @data = date
     @title = title
     @summary = summary
     @img_url = img_url
@@ -33,6 +34,7 @@ class Tonight
 
   def attributes
     Hash[
+      date: date,
       title: title,
       summary: summary,
       img_url: img_url,
@@ -44,6 +46,12 @@ class Tonight
   # `x || y ` => only parse the document once and cache the result on the instance
   def cache
     @cache || @doc.to_s
+  end
+
+  def date  # pull date from page
+    month = @doc.css('li.Tonight > .date_icon > span').text
+    day = @doc.css('li.Tonight > .date_icon > em').text
+    @date || [Date.today.year, month, day].join('-')
   end
 
   def title
