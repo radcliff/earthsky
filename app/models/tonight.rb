@@ -68,8 +68,20 @@ class Tonight
 
 private
   def scrape
-    response = Faraday.get 'http://earthsky.org/tonight'
-    @doc = Nokogiri::HTML(response.body)
+    tries = 0
+
+    begin
+      tries += 1
+
+      response = Faraday.get 'http://earthsky.org/tonight'
+      @doc = Nokogiri::HTML(response.body)
+
+    rescue Faraday::ConnectionFailed => error
+      puts error.message
+
+      sleep(0.5); retry if tries < 5
+      raise
+    end
   end
 
 end
