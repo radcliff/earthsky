@@ -13,9 +13,17 @@ class Tonight
   end
 
 
-  def self.find  # get most recent 'tonight' post from Redis
+  def self.find_or_create  #=> returns serialized object
     key = ['tonight', Date.today.to_s].join(':')
-    $redis.hgetall(key)
+
+    if $redis.exists(key)  # check if in cache
+      @tonight = $redis.hgetall(key)
+    else  # or create
+      @tonight = Tonight.new.attributes
+      $redis.mapped_hmset(key, @tonight)
+    end
+
+    return @tonight
   end
 
 

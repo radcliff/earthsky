@@ -27,4 +27,25 @@ describe Tonight do
     expect(@tonight).to have_attributes attributes
   end
 
+  describe '#find_or_create' do
+    before :each do
+      VCR.use_cassette 'model/tonight' do
+        @tonite = Tonight.find_or_create
+      end
+
+      @key = ['tonight', Date.today.to_s].join(':')
+    end
+
+    it 'caches a new "tonight"' do
+      expect($redis.exists(@key)).to be(true)
+    end
+
+    it 'finds an existing "tonight' do
+      tonight = $redis.hgetall(@key)
+      tonite = Tonight.find_or_create  # no web request/no VCR
+
+      expect(tonight).to eq(tonite)
+    end
+  end
+
 end

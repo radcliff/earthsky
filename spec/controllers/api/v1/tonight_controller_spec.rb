@@ -6,10 +6,12 @@ describe Api::V1::TonightController, type: :controller do
   describe 'GET #show' do
 
     before do 
-      get :show, format: :json
+      VCR.use_cassette 'model/tonight' do
+        get :show, format: :json
+      end
     end
 
-    it 'returns a "tonight" post object' do
+    it 'returns a "tonight" preview object' do
       VCR.use_cassette 'model/tonight' do
         @tonight = FactoryGirl.build(:tonight)
       end

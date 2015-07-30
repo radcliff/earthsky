@@ -3,7 +3,7 @@ module Api
     class TonightController < ApplicationController
 
       def show
-        @tonight = Tonight.find
+        @tonight = Tonight.find_or_create
       end
 
     end
