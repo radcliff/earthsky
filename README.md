@@ -1,6 +1,6 @@
 # Unofficial EarthSky API
 
-EarthSky.org has the best astronomy content on the web - Now it has a preview API!
+EarthSky.org has the best astronomy content on the web -- now it has a preview API!
 
 # EarthSky Tonight
 
@@ -10,8 +10,10 @@ EarthSky Tonight is an astronomy blog that features daily posts detailing what i
 
 ## API
 
+### request
 `GET api/v1/tonight`
 
+### response
 ```json
 {
   "tonight": {
@@ -22,6 +24,36 @@ EarthSky Tonight is an astronomy blog that features daily posts detailing what i
   }
 }
 ```
+### request
+`GET api/v1/tonight/archive?count=3`
 
+### response
+```json
+{
+  "archive": [
+    {
+      "date": "2015-07-30",
+      "title": "Blue Moon \u2013 second July full moon \u2013 on July 31",
+      "summary": "The July 31, 2015 full moon won\u2019t appear blue in color.  But \u2013 as the second of two full moons to occur in a single calendar month \u2013 many will call it a Blue Moon.",
+      "img_url": "http:\/\/en.es-static.us\/upl\/2015\/07\/moon-blue-La-Lune-The-Moon-7-27-2015-Patrick-Casaert-sq-e1438256991732.jpg",
+      "permalink": "http:\/\/earthsky.org\/tonight\/blue-moon-second-july-full-moon-to-occur-on-july-31"
+    },
+    {
+      "date": "2015-07-29",
+      "title": "Blue Moon \u2013 second July full moon \u2013 on July 31",
+      "summary": "The July 31, 2015 full moon won\u2019t appear blue in color.  But \u2013 as the second of two full moons to occur in a single calendar month \u2013 many will call it a Blue Moon.",
+      "img_url": "http:\/\/en.es-static.us\/upl\/2015\/07\/moon-blue-La-Lune-The-Moon-7-27-2015-Patrick-Casaert-sq-e1438256991732.jpg",
+      "permalink": "http:\/\/earthsky.org\/tonight\/blue-moon-second-july-full-moon-to-occur-on-july-31"
+    },
+    {
+      "date": "2015-07-28",
+      "title": "Blue Moon \u2013 second July full moon \u2013 on July 31",
+      "summary": "The July 31, 2015 full moon won\u2019t appear blue in color.  But \u2013 as the second of two full moons to occur in a single calendar month \u2013 many will call it a Blue Moon.",
+      "img_url": "http:\/\/en.es-static.us\/upl\/2015\/07\/moon-blue-La-Lune-The-Moon-7-27-2015-Patrick-Casaert-sq-e1438256991732.jpg",
+      "permalink": "http:\/\/earthsky.org\/tonight\/blue-moon-second-july-full-moon-to-occur-on-july-31"
+    }
+  ]
+}
+```
 
 
