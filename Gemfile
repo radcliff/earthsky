@@ -26,4 +26,5 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'vcr', git: 'https://github.com/vcr/vcr.git'
+  gem 'fakeredis', :require => 'fakeredis/rspec'
 end
