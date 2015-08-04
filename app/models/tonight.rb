@@ -67,7 +67,8 @@ class Tonight
       node.text =~ /\ABottom line:/i
     end
 
-    @summary || bottom_line.text.sub(/\ABottom line: /i, '').strip  # slice out "Bottom line:" from summary
+    text = bottom_line.try(:text)  # TODO: alternate summary if no "bottom line"
+    @summary || text.sub(/\ABottom line: /i, '').strip if text # slice out "Bottom line:" from summary
   end
 
   def img_url
